@@ -1,0 +1,10 @@
+SELECT 
+    regiao,
+    estado,
+    SUM(casos_novos) AS total_casos,
+    SUM(obitos_novos) AS total_obitos,
+    ROUND ((SUM(obitos_novos)* 100.0) / (SUM(casos_novos)),2) AS porc_obito
+    FROM geral
+WHERE municipio IS NULL AND populacao_tcu_2019 IS NOT NULL
+GROUP BY regiao, estado
+ORDER BY porc_obito DESC;
